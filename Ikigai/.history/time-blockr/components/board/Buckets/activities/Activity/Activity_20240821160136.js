@@ -1,0 +1,40 @@
+"use client";
+import React, { useState } from "react";
+import boardStore from "../../../store";
+import Title from "./Title";
+import Relationships from "./Relationships";
+import Tasks from "./Tasks/Tasks";
+import { Box, Card } from "@mui/material";
+import Priority from "./Priority";
+
+export default function Activity({ bucketId, activity, bucket }) {
+  const buckets = boardStore((state) => state.buckets);
+
+  console.log(buckets);
+
+  console.log(activity);
+
+  const addActivity = boardStore((state) => state.addActivity);
+
+  const handleSubmit = (taskId, newActivity, e) => {
+    e.preventDefault;
+    addActivity(taskId, newActivity);
+  };
+
+  return (
+    <>
+      <Card>
+        <CardHeader title={bucket.title} />
+
+        <Title bucketId={bucketId} activity={activity} />
+        <Relationships bucketId={bucketId} activity={activity} />
+        <Priority bucketId={bucketId} activity={activity} />
+        <Tasks bucketId={bucketId} activity={activity} />
+
+        {/* 
+        
+        <Stats bucketId={bucketId} activity={activity} /> */}
+      </Card>
+    </>
+  );
+}
