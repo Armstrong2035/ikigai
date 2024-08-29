@@ -30,7 +30,7 @@ export default function Buckets() {
     <Container>
       <Grid container spacing={3}>
         {buckets.map((bucket) => (
-          <Grid item key={bucket.id} lg={3} md={4} sm={6} xs={6}>
+          <Grid item key={bucket.id} lg={4} md={4} sm={6} xs={6}>
             <Link
               href={`/board/bucket/${bucket.id}`}
               style={{ textDecoration: "none" }}

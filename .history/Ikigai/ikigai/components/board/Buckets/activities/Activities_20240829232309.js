@@ -19,7 +19,7 @@ export default function Activities({ bucket }) {
       <Container>
         <AddActivity bucketId={bucket.id} />
 
-        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={5}>
+        <Masonry columns={3} spacing={5}>
           {activitiesToRender.map((activity) => (
             <Activity
               key={activity.id}

@@ -4,7 +4,6 @@ import AddIcon from "@mui/icons-material/Add";
 import boardStore from "../../store";
 import Activity from "./Activity/Activity";
 import AddActivity from "./AddActivity";
-import Masonry from "@mui/lab/Masonry";
 
 export default function Activities({ bucket }) {
   const activities = boardStore((state) => state.activities);
@@ -18,20 +17,9 @@ export default function Activities({ bucket }) {
     <>
       <Container>
         <AddActivity bucketId={bucket.id} />
-
-        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={5}>
+        <Grid container direction={"row"} spacing={5}>
           {activitiesToRender.map((activity) => (
-            <Activity
-              key={activity.id}
-              bucketId={bucket.id}
-              activity={activity}
-              bucket={bucket}
-            />
-          ))}
-        </Masonry>
-        {/* <Grid container direction={"row"} spacing={5}>
-          {activitiesToRender.map((activity) => (
-            <Grid item lg={4} sm={4} key={activity.id}>
+            <Grid item lg={6} sm={12} key={activity.id}>
               <Activity
                 key={activity.id}
                 bucketId={bucket.id}
@@ -40,7 +28,7 @@ export default function Activities({ bucket }) {
               />
             </Grid>
           ))}
-        </Grid> */}
+        </Grid>
       </Container>
     </>
   );
