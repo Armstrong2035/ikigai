@@ -14,7 +14,11 @@ export default function Bucket({ bucket }) {
   return (
     <div style={{ overflow: "hidden" }}>
       <BackToBoard />
-
+      <Link href={`/board`}>
+        <IconButton sx={{ color: "#CBD6D6" }}>
+          <ArrowBackIosNewIcon />
+        </IconButton>
+      </Link>
       <Stack justifyContent={"center"} alignItems={"center"} spacing={4}>
         <BucketHeader bucket={bucket} />
         <BucketTitle bucket={bucket} />
