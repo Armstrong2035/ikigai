@@ -29,7 +29,7 @@ export default function UnsplashSearch({ bucket }) {
               key={image.id}
               src={image.urls.regular}
               alt={image.alt_description}
-              onClick={() => updateBucketHeader(bucket.id, image.urls.regular)}
+              onClick={() => updateBucketHeader(bucket.id, image.urls.full)}
               style={{
                 cursor: "pointer",
                 width: "100%",
