@@ -67,14 +67,9 @@ export default function Buckets() {
                   }}
                 ></div>
                 <Box
-                  sx={{
-                    height: "50%",
-                    width: "100%",
-                    // border: "1px solid red",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  sx={{ height: "50%", width: "100%", border: "1px solid red" }}
                 >
                   <Typography variant="p" sx={{ color: "#d6d6d6" }}>
                     {bucket.title}

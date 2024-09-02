@@ -70,7 +70,7 @@ export default function Buckets() {
                   sx={{
                     height: "50%",
                     width: "100%",
-                    // border: "1px solid red",
+                    border: "1px solid red",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

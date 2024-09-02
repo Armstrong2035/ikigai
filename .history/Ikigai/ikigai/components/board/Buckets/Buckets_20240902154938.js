@@ -66,20 +66,9 @@ export default function Buckets() {
                     position: "relative",
                   }}
                 ></div>
-                <Box
-                  sx={{
-                    height: "50%",
-                    width: "100%",
-                    // border: "1px solid red",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="p" sx={{ color: "#d6d6d6" }}>
-                    {bucket.title}
-                  </Typography>
-                </Box>
+                <Typography variant="p" sx={{ color: "#d6d6d6" }}>
+                  {bucket.title}
+                </Typography>
               </Stack>
             </Link>
           </Grid>

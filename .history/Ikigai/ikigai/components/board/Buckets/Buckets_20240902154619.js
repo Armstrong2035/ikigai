@@ -42,7 +42,7 @@ export default function Buckets() {
               style={{ textDecoration: "none" }}
             >
               <Stack
-                alignItems={"center"}
+                spacing={5}
                 sx={{
                   height: isDesktop ? "40vh" : "150px",
                   backgroundColor: "#252525",
@@ -66,20 +66,14 @@ export default function Buckets() {
                     position: "relative",
                   }}
                 ></div>
-                <Box
-                  sx={{
-                    height: "50%",
-                    width: "100%",
-                    // border: "1px solid red",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+                <Typography
+                  variant="p"
+                  alignSelf="center"
+                  justifySelf="center"
+                  sx={{ color: "#d6d6d6" }}
                 >
-                  <Typography variant="p" sx={{ color: "#d6d6d6" }}>
-                    {bucket.title}
-                  </Typography>
-                </Box>
+                  {bucket.title}
+                </Typography>
               </Stack>
             </Link>
           </Grid>
