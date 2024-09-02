@@ -9,7 +9,7 @@ export default function Bucket({ bucket }) {
   const updateBucketHeader = boardStore((state) => state.updateBucketHeader);
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       <Stack justifyContent={"center"} alignItems={"center"} spacing={4}>
         <BucketHeader bucket={bucket} />
         <BucketTitle bucket={bucket} />
