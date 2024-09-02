@@ -7,7 +7,7 @@ export default async function searchImages(query) {
   console.log(accessKey);
   try {
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?query=${query}&orientation=${orientation}&per_page=${30}`,
+      `https://api.unsplash.com/search/photos?query=${query}&orientation=${orientation}&per_page=${perPage}`,
       {
         headers: {
           Authorization: `Client-ID ${accessKey}`,
