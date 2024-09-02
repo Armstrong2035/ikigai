@@ -16,7 +16,7 @@ export default function Activities({ bucket }) {
 
   return (
     <>
-      <Container sx={{ overflow: "hidden" }}>
+      <Container sx={{overflow: 'hidden'}}
         <Stack alignItems={"center"}>
           <AddActivity bucketId={bucket.id} />
 
