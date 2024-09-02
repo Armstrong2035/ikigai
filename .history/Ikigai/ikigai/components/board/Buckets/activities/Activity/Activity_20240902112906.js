@@ -65,7 +65,7 @@ export default function Activity({ bucketId, activity, bucket }) {
     <Card sx={{ backgroundColor: styles.backgroundColor }}>
       <CardHeader
         title={
-          <Stack>
+          <Stack spacing={1}>
             <Grid
               container
               direction="row"
@@ -79,7 +79,6 @@ export default function Activity({ bucketId, activity, bucket }) {
                 <ActivityMenu activity={activity} />
               </Grid>
             </Grid>
-
             <AddRelationships
               activity={activity}
               getPriorityStyle={getPriorityStyle}

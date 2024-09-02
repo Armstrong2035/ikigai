@@ -46,7 +46,7 @@ export default function Buckets() {
               >
                 <div
                   style={{
-                    height: "50%",
+                    height: "70px",
 
                     backgroundImage: bucket.headerImage.startsWith(
                       "linear-gradient"

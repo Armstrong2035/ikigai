@@ -17,7 +17,7 @@ export default function Activities({ bucket }) {
   return (
     <>
       <Container>
-        <Stack alignItems={"center"}>
+        <Stack>
           <AddActivity bucketId={bucket.id} />
 
           <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={5}>

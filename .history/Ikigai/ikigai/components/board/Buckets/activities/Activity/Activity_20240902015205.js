@@ -12,7 +12,7 @@ import {
   Stack,
   Button,
   Grid,
-} from "@mui/material";
+} from "@mui/material"; // Updated import
 import ActivityMenu from "./ActivityMenu";
 import Relationships from "./Relationships";
 import AddTask from "./Tasks/AddTask";
@@ -65,21 +65,18 @@ export default function Activity({ bucketId, activity, bucket }) {
     <Card sx={{ backgroundColor: styles.backgroundColor }}>
       <CardHeader
         title={
-          <Stack>
-            <Grid
-              container
-              direction="row"
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Grid item sm={9} xs={9}>
+          <Stack spacing={1}>
+            <Grid container spacing={2}>
+              {" "}
+              <Grid item xs={12} sm={6} md={8}>
+                {" "}
                 <Title styles={styles} activity={activity} />
               </Grid>
-              <Grid item sm={3} xs={3}>
+              <Grid item xs={12} sm={6} md={4}>
+                {" "}
                 <ActivityMenu activity={activity} />
               </Grid>
             </Grid>
-
             <AddRelationships
               activity={activity}
               getPriorityStyle={getPriorityStyle}

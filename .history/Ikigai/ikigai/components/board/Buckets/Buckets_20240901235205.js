@@ -38,7 +38,7 @@ export default function Buckets() {
               <Stack
                 spacing={5}
                 sx={{
-                  height: "40vh",
+                  height: "200px",
                   backgroundColor: "#252525",
                   borderRadius: "10px",
                   overflow: "hidden",
@@ -46,8 +46,7 @@ export default function Buckets() {
               >
                 <div
                   style={{
-                    height: "50%",
-
+                    height: "540%",
                     backgroundImage: bucket.headerImage.startsWith(
                       "linear-gradient"
                     )
@@ -61,7 +60,7 @@ export default function Buckets() {
                   }}
                 ></div>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   alignSelf="center"
                   sx={{ color: "#d6d6d6" }}
                 >

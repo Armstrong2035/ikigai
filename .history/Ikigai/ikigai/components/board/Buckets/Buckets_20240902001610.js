@@ -28,9 +28,9 @@ export default function Buckets() {
 
   return (
     <Container>
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}> */}
         {buckets.map((bucket) => (
-          <Grid item key={bucket.id} lg={3} md={4} sm={12} xs={12}>
+          // <Grid item key={bucket.id} lg={3} md={4} sm={6} xs={6}>
             <Link
               href={`/board/bucket/${bucket.id}`}
               style={{ textDecoration: "none" }}
@@ -38,16 +38,16 @@ export default function Buckets() {
               <Stack
                 spacing={5}
                 sx={{
-                  height: "40vh",
+                  height: "200px",
                   backgroundColor: "#252525",
                   borderRadius: "10px",
                   overflow: "hidden",
+                  flexShrink: "none",
                 }}
               >
                 <div
                   style={{
-                    height: "50%",
-
+                    height: "40%",
                     backgroundImage: bucket.headerImage.startsWith(
                       "linear-gradient"
                     )
@@ -61,7 +61,7 @@ export default function Buckets() {
                   }}
                 ></div>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   alignSelf="center"
                   sx={{ color: "#d6d6d6" }}
                 >
@@ -69,9 +69,9 @@ export default function Buckets() {
                 </Typography>
               </Stack>
             </Link>
-          </Grid>
+          {/* </Grid> */}
         ))}
-      </Grid>
+      {/* </Grid> */}
     </Container>
   );
 }

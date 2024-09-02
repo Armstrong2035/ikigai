@@ -1,6 +1,6 @@
 import React from "react";
 import boardStore from "../../../store";
-import { Autocomplete, TextField, Box } from "@mui/material";
+import { Autocomplete, Chip, TextField, Box } from "@mui/material";
 import Relationships from "./Relationships";
 
 export default function AddRelationships({
@@ -9,6 +9,7 @@ export default function AddRelationships({
   styles,
 }) {
   const addRelationship = boardStore((state) => state.addRelationship);
+  const removeRelationship = boardStore((state) => state.removeRelationship);
   const activities = boardStore((state) => state.activities);
   const relationships = boardStore((state) => state.relationships);
 
@@ -45,12 +46,15 @@ export default function AddRelationships({
     }
   };
 
+  // const handleDelete = (relationshipToDelete) => {
+  //   removeRelationship(relationshipToDelete.id);
+  // };
+
   return (
     <Box>
       <Autocomplete
         sx={{
           backgroundColor: styles.backgroundColor,
-          width: { xs: "100%", sm: "auto" }, // Full width on extra-small screens
           "& .MuiOutlinedInput-notchedOutline": {
             border: "none",
           },
@@ -64,18 +68,12 @@ export default function AddRelationships({
           "& .MuiInputBase-input": {
             color: "#FFFFFF",
           },
-          marginBottom: { xs: 2, sm: 0 }, // Adds margin on smaller screens
         }}
         options={activities.filter((a) => a.id !== activity.id)}
         getOptionLabel={(option) => option.title}
         onChange={handleRelationshipChange}
         renderInput={(params) => (
-          <TextField
-            size="small"
-            {...params}
-            label="Relationship"
-            fullWidth // Makes the TextField full width on smaller screens
-          />
+          <TextField {...params} label="Add Relationship" />
         )}
       />
       <Relationships activity={activity} getPriorityStyle={getPriorityStyle} />

@@ -21,57 +21,63 @@ import BucketTitle from "./Bucket/BucketTitle/BucketTitle";
 import ColorPicker from "./Bucket/BucketColor/BucketColor";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import {
+  Home,
+  Work,
+  EmojiEmotions,
+  Fastfood,
+  Description,
+  CheckCircle,
+} from "@mui/icons-material";
 
 export default function Buckets() {
   const [editMode, setEditMode] = useState(false);
   const buckets = boardStore((state) => state.buckets);
 
   return (
-    <Container>
-      <Grid container spacing={3}>
-        {buckets.map((bucket) => (
-          <Grid item key={bucket.id} lg={3} md={4} sm={12} xs={12}>
-            <Link
-              href={`/board/bucket/${bucket.id}`}
-              style={{ textDecoration: "none" }}
+    <Container sx={{ overflowX: "auto", padding: "0 10px" }}>
+      <Typography variant="h6" gutterBottom>
+        Buckets
+      </Typography>
+      <Box sx={{ overflow: "auto" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            minWidth: "min-content",
+            pb: 2, // Add some padding at the bottom for scrollbar space
+          }}
+        >
+          {buckets.map((bucket) => (
+            <Card
+              key={bucket.id}
+              sx={{
+                minWidth: 200,
+                bgcolor: "grey.900",
+                flexShrink: 0, // Prevent the cards from shrinking
+              }}
             >
-              <Stack
-                spacing={5}
-                sx={{
-                  height: "40vh",
-                  backgroundColor: "#252525",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    height: "50%",
-
-                    backgroundImage: bucket.headerImage.startsWith(
-                      "linear-gradient"
-                    )
-                      ? bucket.headerImage
-                      : `url(${bucket.headerImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    width: "100%",
-                    position: "relative",
-                  }}
-                ></div>
+              <CardContent sx={{ p: 2 }}>
+                <Box sx={{ mb: 1 }}>
+                  {/* Assuming bucket.icon is available, otherwise replace with a default icon */}
+                  {bucket.icon || <Home />}
+                </Box>
                 <Typography
-                  variant="h5"
-                  alignSelf="center"
-                  sx={{ color: "#d6d6d6" }}
+                  variant="subtitle2"
+                  component="div"
+                  sx={{ mb: 0.5 }}
                 >
                   {bucket.title}
                 </Typography>
-              </Stack>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+                <Typography variant="caption" color="text.secondary">
+                  {/* Assuming bucket.date is available, otherwise replace with a default date */}
+                  {bucket.date || "Date not available"}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Stack>
+      </Box>
     </Container>
   );
 }

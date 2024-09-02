@@ -11,7 +11,6 @@ import {
   CardHeader,
   Stack,
   Button,
-  Grid,
 } from "@mui/material";
 import ActivityMenu from "./ActivityMenu";
 import Relationships from "./Relationships";
@@ -65,21 +64,15 @@ export default function Activity({ bucketId, activity, bucket }) {
     <Card sx={{ backgroundColor: styles.backgroundColor }}>
       <CardHeader
         title={
-          <Stack>
-            <Grid
-              container
+          <Stack spacing={1} alignItems={"center"}>
+            <Stack
               direction="row"
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <Grid item sm={9} xs={9}>
-                <Title styles={styles} activity={activity} />
-              </Grid>
-              <Grid item sm={3} xs={3}>
-                <ActivityMenu activity={activity} />
-              </Grid>
-            </Grid>
-
+              <Title styles={styles} activity={activity} />
+              <ActivityMenu activity={activity} />
+            </Stack>
             <AddRelationships
               activity={activity}
               getPriorityStyle={getPriorityStyle}

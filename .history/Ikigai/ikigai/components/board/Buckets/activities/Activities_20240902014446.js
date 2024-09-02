@@ -17,20 +17,18 @@ export default function Activities({ bucket }) {
   return (
     <>
       <Container>
-        <Stack alignItems={"center"}>
-          <AddActivity bucketId={bucket.id} />
+        <AddActivity bucketId={bucket.id} />
 
-          <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={5}>
-            {activitiesToRender.map((activity) => (
-              <Activity
-                key={activity.id}
-                bucketId={bucket.id}
-                activity={activity}
-                bucket={bucket}
-              />
-            ))}
-          </Masonry>
-        </Stack>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={5}>
+          {activitiesToRender.map((activity) => (
+            <Activity
+              key={activity.id}
+              bucketId={bucket.id}
+              activity={activity}
+              bucket={bucket}
+            />
+          ))}
+        </Masonry>
         {/* <Grid container direction={"row"} spacing={5}>
           {activitiesToRender.map((activity) => (
             <Grid item lg={4} sm={4} key={activity.id}>

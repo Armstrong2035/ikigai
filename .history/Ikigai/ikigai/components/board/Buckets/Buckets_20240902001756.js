@@ -28,50 +28,50 @@ export default function Buckets() {
 
   return (
     <Container>
-      <Grid container spacing={3}>
-        {buckets.map((bucket) => (
-          <Grid item key={bucket.id} lg={3} md={4} sm={12} xs={12}>
-            <Link
-              href={`/board/bucket/${bucket.id}`}
-              style={{ textDecoration: "none" }}
+      {/* <Grid container spacing={3}> */}
+      {buckets.map((bucket) => (
+        <Grid item key={bucket.id} lg={3} md={4} sm={6} xs={6}>
+          <Link
+            href={`/board/bucket/${bucket.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Stack
+              spacing={5}
+              sx={{
+                height: "200px",
+                backgroundColor: "#252525",
+                borderRadius: "10px",
+                overflow: "hidden",
+                flexShrink: "none",
+              }}
             >
-              <Stack
-                spacing={5}
-                sx={{
-                  height: "40vh",
-                  backgroundColor: "#252525",
-                  borderRadius: "10px",
-                  overflow: "hidden",
+              <div
+                style={{
+                  height: "40%",
+                  backgroundImage: bucket.headerImage.startsWith(
+                    "linear-gradient"
+                  )
+                    ? bucket.headerImage
+                    : `url(${bucket.headerImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  width: "100%",
+                  position: "relative",
                 }}
+              ></div>
+              <Typography
+                variant="h6"
+                alignSelf="center"
+                sx={{ color: "#d6d6d6" }}
               >
-                <div
-                  style={{
-                    height: "50%",
-
-                    backgroundImage: bucket.headerImage.startsWith(
-                      "linear-gradient"
-                    )
-                      ? bucket.headerImage
-                      : `url(${bucket.headerImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    width: "100%",
-                    position: "relative",
-                  }}
-                ></div>
-                <Typography
-                  variant="h5"
-                  alignSelf="center"
-                  sx={{ color: "#d6d6d6" }}
-                >
-                  {bucket.title}
-                </Typography>
-              </Stack>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+                {bucket.title}
+              </Typography>
+            </Stack>
+          </Link>
+        </Grid>
+      ))}
+      {/* </Grid> */}
     </Container>
   );
 }

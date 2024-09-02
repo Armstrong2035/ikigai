@@ -66,17 +66,19 @@ export default function Activity({ bucketId, activity, bucket }) {
       <CardHeader
         title={
           <Stack>
-            <Grid
-              container
-              direction="row"
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Grid item sm={9} xs={9}>
-                <Title styles={styles} activity={activity} />
-              </Grid>
-              <Grid item sm={3} xs={3}>
-                <ActivityMenu activity={activity} />
+            <Grid item>
+              <Grid
+                container
+                direction="row"
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Grid item sm={9} xs={9}>
+                  <Title styles={styles} activity={activity} />
+                </Grid>
+                <Grid item sm={3} xs={3}>
+                  <ActivityMenu activity={activity} />
+                </Grid>
               </Grid>
             </Grid>
 

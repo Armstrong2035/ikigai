@@ -38,7 +38,7 @@ export default function Buckets() {
               <Stack
                 spacing={5}
                 sx={{
-                  height: "40vh",
+                  height: "30vh",
                   backgroundColor: "#252525",
                   borderRadius: "10px",
                   overflow: "hidden",
