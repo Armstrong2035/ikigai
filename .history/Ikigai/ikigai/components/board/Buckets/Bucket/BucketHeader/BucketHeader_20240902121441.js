@@ -61,7 +61,6 @@ export default function BucketHeader({ bucket, onHeaderChange }) {
             "&:hover": {
               backgroundColor: "#2F2F2F", // Same hover color as the original
             },
-            color: "#CBD6D6",
           }}
         >
           Change Header
@@ -89,6 +88,7 @@ export default function BucketHeader({ bucket, onHeaderChange }) {
           </DialogContentText>
           <HeaderSelectionModal bucket={bucket} />
         </DialogContent>
+        <DialogActions></DialogActions>
       </Dialog>
     </Box>
   );

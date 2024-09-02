@@ -61,7 +61,6 @@ export default function BucketHeader({ bucket, onHeaderChange }) {
             "&:hover": {
               backgroundColor: "#2F2F2F", // Same hover color as the original
             },
-            color: "#CBD6D6",
           }}
         >
           Change Header
@@ -77,18 +76,15 @@ export default function BucketHeader({ bucket, onHeaderChange }) {
           "& .MuiDialog-paper": {
             width: { xs: "100%", sm: "80%" }, // Adjust dialog width for smaller screens
             maxHeight: "90vh", // Prevent the dialog from exceeding viewport height
-            backgroundColor: "#191919",
-            border: "1px solid white",
           },
         }}
       >
-        <DialogTitle sx={{ color: "#CBD6D6" }}>Select Header Image</DialogTitle>
+        <DialogTitle>Select Header Image</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ color: "#CBD6D6" }}>
-            Select a header image
-          </DialogContentText>
+          <DialogContentText>Select a header image</DialogContentText>
           <HeaderSelectionModal bucket={bucket} />
         </DialogContent>
+        <DialogActions></DialogActions>
       </Dialog>
     </Box>
   );

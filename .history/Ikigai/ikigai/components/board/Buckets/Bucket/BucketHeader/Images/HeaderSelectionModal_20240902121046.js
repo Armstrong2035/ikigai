@@ -12,7 +12,7 @@ export default function HeaderSelectionModal({ bucket }) {
   };
 
   return (
-    <Box sx={{ height: "60vh", backgroundColor: "#191919" }}>
+    <Box sx={{ height: "60vh" }}>
       <Tabs
         value={selectedTab}
         onChange={handleChange}

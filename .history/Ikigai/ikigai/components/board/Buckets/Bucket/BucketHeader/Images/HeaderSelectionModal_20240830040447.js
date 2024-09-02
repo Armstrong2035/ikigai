@@ -12,13 +12,13 @@ export default function HeaderSelectionModal({ bucket }) {
   };
 
   return (
-    <Box sx={{ height: "60vh", backgroundColor: "#191919" }}>
+    <Box sx={{ height: "60vh" }}>
       <Tabs
         value={selectedTab}
         onChange={handleChange}
         aria-label="header selection tabs"
       >
-        <Tab label="Colors" />
+        <Tab label="Gradients and Colors" />
         <Tab label="Images" />
       </Tabs>
 
