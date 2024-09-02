@@ -21,22 +21,17 @@ import BucketTitle from "./Bucket/BucketTitle/BucketTitle";
 import ColorPicker from "./Bucket/BucketColor/BucketColor";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function Buckets() {
   const [editMode, setEditMode] = useState(false);
   const buckets = boardStore((state) => state.buckets);
   const reverseBuckets = buckets.slice().reverse();
 
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
-
   return (
     <Container>
       <Grid container spacing={3}>
         {reverseBuckets.map((bucket) => (
-          <Grid item key={bucket.id} lg={3} md={4} sm={6} xs={6}>
+          <Grid item key={bucket.id} lg={3} md={4} sm={12} xs={12}>
             <Link
               href={`/board/bucket/${bucket.id}`}
               style={{ textDecoration: "none" }}
@@ -44,7 +39,7 @@ export default function Buckets() {
               <Stack
                 spacing={5}
                 sx={{
-                  height: isDesktop ? "40vh" : "30vh",
+                  height: "40vh",
                   backgroundColor: "#252525",
                   borderRadius: "10px",
                   overflow: "hidden",

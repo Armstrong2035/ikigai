@@ -21,8 +21,8 @@ import BucketTitle from "./Bucket/BucketTitle/BucketTitle";
 import ColorPicker from "./Bucket/BucketColor/BucketColor";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useMediaQuery from "@mui/material";
+import useTheme from "@mui/material";
 
 export default function Buckets() {
   const [editMode, setEditMode] = useState(false);
