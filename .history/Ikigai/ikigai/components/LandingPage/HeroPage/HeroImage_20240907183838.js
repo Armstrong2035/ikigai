@@ -1,0 +1,15 @@
+import { Grid, Stack } from "@mui/material";
+import Image from "next/image";
+import bucketviewDesktop from "../../../images/bucketview-desktop.png";
+import homePageMobile from "../../../images/home-page-mobile.png";
+import relationshipsMobile from "../../../images/relationships-mobile.png";
+import ikigaiRecording from "../../../images/ikigai-recording.mp4";
+
+export default function HeroImage() {
+  return (
+    <video autoPlay loop muted playsInline>
+      <source src="/videos/ikigai-recording.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+}

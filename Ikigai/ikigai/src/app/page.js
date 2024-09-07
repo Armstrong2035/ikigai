@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import Board from "./board/page";
+import LandingPage from "../../components/LandingPage/LandingPage";
 
 export default function Home() {
   return (
-    <>
-      <Board />
-    </>
+    <div style={{ overflow: "none" }}>
+      <LandingPage />
+    </div>
   );
 }

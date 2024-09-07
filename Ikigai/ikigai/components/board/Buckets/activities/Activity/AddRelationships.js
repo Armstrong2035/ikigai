@@ -73,7 +73,7 @@ export default function AddRelationships({
           <TextField
             size="small"
             {...params}
-            label="Relationship"
+            label="Relationships"
             fullWidth // Makes the TextField full width on smaller screens
           />
         )}
