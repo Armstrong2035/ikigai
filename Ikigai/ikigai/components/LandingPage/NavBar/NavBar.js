@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Button, Stack } from "@mui/material";
+import Link from "next/link";
 
 export default function NavBar() {
   return (
@@ -6,7 +7,7 @@ export default function NavBar() {
       <AppBar elevation="none" sx={{ backgroundColor: "inherit" }}>
         <Stack direction="row" justifyContent={"flex-end"} sx={{ mr: 2 }}>
           <Toolbar>
-            <a href="/signup" style={{ textDecoration: "none" }}>
+            <Link href="/signup" style={{ textDecoration: "none" }}>
               <p
                 style={{
                   color: "white",
@@ -16,9 +17,10 @@ export default function NavBar() {
               >
                 Signup
               </p>
-            </a>
+            </Link>
           </Toolbar>
           <Toolbar>
+            <Link href={'/login'}>
             <button
               style={{
                 backgroundColor: "#BFAFF2",
@@ -38,6 +40,7 @@ export default function NavBar() {
             >
               Login
             </button>
+            </Link>
           </Toolbar>
         </Stack>
       </AppBar>

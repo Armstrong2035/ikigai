@@ -17,24 +17,24 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const firebaseApp = initializeApp(firebaseConfig);
+const analytics = getAnalytics(firebaseApp);
 
 // Initialize Firebase Auth
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-// Function to handle Google Sign-In
-const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    // The signed-in user info
-    const user = result.user;
-    console.log("User signed in: ", user);
-  } catch (error) {
-    console.error("Error during sign-in: ", error);
-  }
-};
+// // Function to handle Google Sign-In
+// const signInWithGoogle = async () => {
+//   try {
+//     const result = await signInWithPopup(auth, provider);
+//     // The signed-in user info
+//     const user = result.user;
+//     console.log("User signed in: ", user);
+//   } catch (error) {
+//     console.error("Error during sign-in: ", error);
+//   }
+// };
 
-// Call signInWithGoogle when needed
-// signInWithGoogle();
+// // Call signInWithGoogle when needed
+// // signInWithGoogle();
