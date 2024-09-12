@@ -17,12 +17,16 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // const [user, setUser] = useState()
+
 
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+
+        // setUser(user)
         // ...
       })
       .then(() => window.location.href = '/board')

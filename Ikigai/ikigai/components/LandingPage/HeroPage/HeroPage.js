@@ -6,7 +6,7 @@ import HeroButton from "./HeroButton";
 
 export default function HeroPage({ styles }) {
   return (
-    <Box sx={{ ml: 5, mr: 5, mt: 10 }}>
+    <Box sx={{ ml: 5, mr: 10, mt: 10, }}>
       <Grid
         container
         spacing={2}
@@ -20,7 +20,7 @@ export default function HeroPage({ styles }) {
             spacing={5}
             direction="column"
             justifyContent="center"
-            alignItems="flex-start" // Left-align text
+            
           >
             <Grid item>
               <HeroText styles={styles} />

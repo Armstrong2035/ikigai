@@ -1,9 +1,9 @@
 import HeroPage from "./HeroPage/HeroPage";
 import NavBar from "./NavBar/NavBar";
-import { Stack, Container, Box } from "@mui/material";
+import { Stack, Container, Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Features from "./HeroPage/Features";
+import Features from "./HeroPage/Features/Features";
 
 export default function LandingPage() {
   const theme = useTheme();
@@ -34,7 +34,7 @@ export default function LandingPage() {
     secondarySemiBold: {
       fontFamily: "Poppins",
       fontWeight: "SemiBold",
-      fontSize: "2px",
+      fontSize: "20px",
       lineHeight: "40px",
       color: "black",
     },
@@ -43,8 +43,9 @@ export default function LandingPage() {
     <>
       <NavBar styles={styles} />
 
-      <Stack spacing={10} sx={{ ml: 5, mr: 5, mt: 15 }}>
+      <Stack spacing={5} sx={{ ml: 5, mr: 5, mt: 15}}>
         <HeroPage styles={styles} />
+        <Typography align='center' sx={styles.bodyBold}>Features</Typography>
         <Features styles={styles} />
       </Stack>
     </>

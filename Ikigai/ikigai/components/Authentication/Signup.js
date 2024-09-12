@@ -1,94 +1,92 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { firebaseApp } from "../../utils/firebase/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import {
-  FormGroup,
   TextField,
   Button,
-  Typography,
-  Container,
-  Box,
   Stack,
+  Alert,
 } from "@mui/material";
-
-import Link from "next/link.js";
+import { useRouter } from "next/router";
+import boardStore from "../board/store";
 
 export const Signup = () => {
+ 
+  const updateUserData = boardStore((state) => state.updateUserData);
   const auth = getAuth(firebaseApp);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [data, setData] = useState({});
 
-  const handleSubmit = (e) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = {
-          name: name,
-          email: email,
-          userId: userCredential.user.uid,
-        };
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-        return userData;
-      })
-      .then((userData) => {
-        setData(userData);
-      })
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value
+    }));
+  };
 
-      .then(() => {
-        window.location.href = "/board";
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error: ${errorCode}, Message: ${errorMessage}`);
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        userId: userCredential.user.uid,
+      };
+
+      updateUserData(userData);
+      window.location.href = "/board";
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const textfields = [
-    { id: "name", label: "Name", value: name, type: "text", setter: setName },
-    { id: "email", label: "Email", value: email, type: "email", setter: setEmail },
-    { id: "password", label: "Password", value: password, type: "password", setter: setPassword },
+    { id: "name", label: "Name", type: "text" },
+    { id: "email", label: "Email", type: "email" },
+    { id: "password", label: "Password", type: "password" },
   ];
   
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "95vh",
-        width: "95vw",
-      }}
-    >
-      <Stack direction="column" spacing={2} sx={{ width: "20%" }}>
-        {textfields.map(({ id, label, value, type, setter }) => (
+    <div style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "95vh",
+      width: "95vw",
+    }}>
+      <Stack component="form" onSubmit={handleSubmit} direction="column" spacing={2} sx={{ width: "20%" }}>
+        {error && <Alert severity="error">{error}</Alert>}
+        {textfields.map(({ id, label, type }) => (
           <TextField
             key={id}
             id={id}
             label={label}
             variant="outlined"
-            value={value}  // Bind to the corresponding state variable
+            value={formData[id]}
             type={type}
-            onChange={(e) => setter(e.target.value)}  // Update the state
+            onChange={handleChange}
             InputProps={{
               style: {
-                color: "#D6D6D6", // Text color
-                backgroundColor: "#252525", // Background color
+                color: "#D6D6D6",
+                backgroundColor: "#252525",
               },
             }}
             InputLabelProps={{
-              style: { color: "#D6D6D6" }, // Label color
+              style: { color: "#D6D6D6" },
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "#D6D6D6", // Border color
+                  borderColor: "#D6D6D6",
                 },
               },
             }}
@@ -99,14 +97,10 @@ export const Signup = () => {
           type="submit"
           variant="contained"
           color="secondary"
-          onClick={handleSubmit}
         >
           Sign up
         </Button>
       </Stack>
     </div>
   );
-  
 };
-
-

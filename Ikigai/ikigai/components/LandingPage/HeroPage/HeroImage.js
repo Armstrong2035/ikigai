@@ -17,7 +17,7 @@ export default function HeroImage() {
           loop
           muted
           playsInline
-          style={{ width: "100%", maxWidth: "100%" }}
+          style={{ width: "100%" }}
         >
           <source src="/videos/ikigai-recording.mp4" type="video/mp4" />
         </video>

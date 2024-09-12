@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function NavBar() {
   return (
     <div style={{ marginBottom: "100px" }}>
-      <AppBar elevation="none" sx={{ backgroundColor: "inherit" }}>
+      <AppBar sx={{ backgroundColor: "inherit" }}>
         <Stack direction="row" justifyContent={"flex-end"} sx={{ mr: 2 }}>
           <Toolbar>
             <Link href="/signup" style={{ textDecoration: "none" }}>
