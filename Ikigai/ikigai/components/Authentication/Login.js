@@ -1,45 +1,52 @@
 import React, { useState } from "react";
 import { firebaseApp } from "../../utils/firebase/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/router";
 import {
-  Typography,
-  FormGroup,
   Button,
   TextField,
-  Container,
   Stack,
-  Box,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
-
 
 export function Login() {
   const auth = getAuth(firebaseApp);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  // const [user, setUser] = useState()
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
-  const handleSubmit = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-
-        // setUser(user)
-        // ...
-      })
-      .then(() => window.location.href = '/board')
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value,
+    }));
   };
 
-  const textfields =[
-    { id: "email", label: "Email", value: email, type: "email", setter: setEmail },
-    { id: "password", label: "Password", value: password, type: "password", setter: setPassword },
-  ]
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      // Navigate to the board page
+      router.push('/board');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`Error: ${errorCode}, Message: ${errorMessage}`);
+      // Handle the error (e.g., show an error message to the user)
+    }
+  };
+
+  const textfields = [
+    { id: "email", label: "Email", value: formData.email, type: "email" },
+    { id: "password", label: "Password", value: formData.password, type: "password" },
+  ];
 
   return (
     <div
@@ -47,33 +54,42 @@ export function Login() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: "95vh",
-        width: "95vw",
+        minHeight: "100vh",
+        width: "100%",
+        padding: isMobile ? "20px" : "0",
       }}
     >
-      <Stack direction="column" spacing={2} sx={{ width: "20%" }}>
-        {textfields.map(({ id, label, value, type, setter }) => (
+      <Stack 
+        direction="column" 
+        spacing={2} 
+        sx={{ 
+          width: isMobile ? "100%" : "300px",
+          maxWidth: "100%",
+        }}
+      >
+        {textfields.map(({ id, label, value, type }) => (
           <TextField
             key={id}
             id={id}
             label={label}
             variant="outlined"
-            value={value}  // Bind to the corresponding state variable
+            value={value}
             type={type}
-            onChange={(e) => setter(e.target.value)}  // Update the state
+            onChange={handleChange}
+            fullWidth
             InputProps={{
               style: {
-                color: "#D6D6D6", // Text color
-                backgroundColor: "#252525", // Background color
+                color: "#D6D6D6",
+                backgroundColor: "#252525",
               },
             }}
             InputLabelProps={{
-              style: { color: "#D6D6D6" }, // Label color
+              style: { color: "#D6D6D6" },
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "#D6D6D6", // Border color
+                  borderColor: "#D6D6D6",
                 },
               },
             }}
@@ -85,6 +101,7 @@ export function Login() {
           variant="contained"
           color="secondary"
           onClick={handleSubmit}
+          fullWidth
         >
           Login
         </Button>

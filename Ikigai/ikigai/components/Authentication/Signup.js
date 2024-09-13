@@ -1,79 +1,100 @@
-import React, { useState } from "react";
-import { firebaseApp } from "../../utils/firebase/firebase";
+import React, { useState, useEffect } from "react";
+import { firebaseApp, db } from "../../utils/firebase/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import {
   TextField,
   Button,
   Stack,
-  Alert,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import boardStore from "../board/store";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 export const Signup = () => {
- 
-  const updateUserData = boardStore((state) => state.updateUserData);
   const auth = getAuth(firebaseApp);
-
+  const router = useRouter();
+  const [isSignupComplete, setIsSignupComplete] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
-      [id]: value
+      [id]: value,
     }));
   };
 
+  useEffect(() => {
+    if (isSignupComplete) {
+      router.push('/board');
+    }
+  }, [isSignupComplete, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const user = userCredential.user;
+
+      // Create user data object
       const userData = {
         name: formData.name,
         email: formData.email,
-        userId: userCredential.user.uid,
+        userId: user.uid,
       };
-
-      updateUserData(userData);
-      window.location.href = "/board";
+      
+      // Create a new document in the "users" collection
+      await setDoc(doc(db, "users", user.uid), userData);
+      
+      setIsSignupComplete(true);
     } catch (error) {
-      setError(error.message);
+      console.error("Error: ", error.code, error.message);
+      // Handle the error (e.g., show an error message to the user)
     }
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const textfields = [
-    { id: "name", label: "Name", type: "text" },
-    { id: "email", label: "Email", type: "email" },
-    { id: "password", label: "Password", type: "password" },
+    { id: "name", label: "Name", value: formData.name, type: "text" },
+    { id: "email", label: "Email", value: formData.email, type: "email" },
+    { id: "password", label: "Password", value: formData.password, type: "password" },
   ];
-  
+
   return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "95vh",
-      width: "95vw",
-    }}>
-      <Stack component="form" onSubmit={handleSubmit} direction="column" spacing={2} sx={{ width: "20%" }}>
-        {error && <Alert severity="error">{error}</Alert>}
-        {textfields.map(({ id, label, type }) => (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        width: "100%",
+        padding: isMobile ? "20px" : "0",
+      }}
+    >
+      <Stack 
+        direction="column" 
+        spacing={2} 
+        sx={{ 
+          width: isMobile ? "100%" : "300px",
+          maxWidth: "100%",
+        }}
+      >
+        {textfields.map(({ id, label, value, type }) => (
           <TextField
             key={id}
             id={id}
             label={label}
             variant="outlined"
-            value={formData[id]}
+            value={value}
             type={type}
             onChange={handleChange}
+            fullWidth
             InputProps={{
               style: {
                 color: "#D6D6D6",
@@ -92,13 +113,15 @@ export const Signup = () => {
             }}
           />
         ))}
-  
+
         <Button
           type="submit"
           variant="contained"
           color="secondary"
+          onClick={handleSubmit}
+          fullWidth
         >
-          Sign up
+          Sign Up
         </Button>
       </Stack>
     </div>
