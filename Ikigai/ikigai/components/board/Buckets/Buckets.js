@@ -23,11 +23,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import getSubcollectionData from "../../../utils/firebase/retrieveData";
 
 export default function Buckets() {
   const [editMode, setEditMode] = useState(false);
   const buckets = boardStore((state) => state.buckets);
+
   const reverseBuckets = buckets.slice().reverse();
+
+ 
+
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));

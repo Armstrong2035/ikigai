@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { firebaseApp } from "../../utils/firebase/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
   Button,
   TextField,
@@ -9,6 +9,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import boardStore from "../board/store"; // Import the store
 
 export function Login() {
   const auth = getAuth(firebaseApp);
@@ -17,6 +18,7 @@ export function Login() {
     email: "",
     password: "",
   });
+  
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -32,7 +34,12 @@ export function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      const user = userCredential.user;
+      
+      // Fetch user data using the user ID
+      await boardStore.getState().fetchUserData(user.uid);
+
       // Navigate to the board page
       router.push('/board');
     } catch (error) {
@@ -56,16 +63,16 @@ export function Login() {
         justifyContent: "center",
         minHeight: "100vh",
         width: "100%",
-        padding: isMobile ? "20px" : "0",
+       
       }}
     >
       <Stack 
         direction="column" 
         spacing={2} 
-        sx={{ 
-          width: isMobile ? "100%" : "300px",
-          maxWidth: "100%",
-        }}
+        // sx={{ 
+        //   width: isMobile ? "100%" : "300px",
+        //   maxWidth: "100%",
+        // }}
       >
         {textfields.map(({ id, label, value, type }) => (
           <TextField

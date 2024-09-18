@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { getUserData } from '../../utils/firebase/retrieveData';
 
 const boardStore = create(
-  persist(
+  
     (set) => ({
       buckets: [
         {
@@ -27,11 +28,16 @@ const boardStore = create(
           color: "",
         },
       ],
-
       activities: [],
       tasks: [],
       relationships: [],
       checkedTasks: {},
+      userData: {},
+
+      setBuckets: (buckets) => set(() => ({ buckets })),
+      setActivities: (activities) => set(() => ({ activities })),
+      setTasks: (tasks) => set(() => ({ tasks })),
+      setRelationships: (relationships) => set(() => ({ relationships })),
 
       addBucket: (newBucket) =>
         set((state) => ({ buckets: [...state.buckets, newBucket] })),
@@ -152,11 +158,6 @@ const boardStore = create(
           buckets: state.buckets.filter((bucket) => bucket.id !== bucketId),
         })),
     }),
-    {
-      name: "board-storage",
-      storage: createJSONStorage(() => localStorage),
-    }
   )
-);
 
 export default boardStore;

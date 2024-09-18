@@ -1,24 +1,38 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "@mui/material";
 import AddBucket from "./Buckets/Bucket/AddBucket";
 import Buckets from "./Buckets/Buckets";
 import boardStore from "./store";
-import { useEffect } from 'react';
-import { createInitialBuckets } from '../Authentication/Signup';
-
+import { db, collection, doc, addDoc, auth } from "../../utils/firebase/firebase"; // Firebase imports
+import { updateUserData } from "../../utils/firebase/updateData";
+import { getUserData } from "../../utils/firebase/retrieveData";
+import { onAuthStateChanged } from "firebase/auth";
 export default function Board() {
+  //const userData = boardStore((state) => state.userData); // Get user data from store
+  const buckets = boardStore((state) => state.buckets);   // Get hardcoded buckets list from store
   const userData = boardStore((state) => state.userData)
-  console.log(userData)
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      createInitialBuckets(userId);
-      localStorage.removeItem('userId'); // Remove the ID after use
-    }
-  }, []);
+ const user = auth.currentUser
 
+ 
+
+ //console.log(user)
+/
+
+ useEffect(() => {  
+   auth.onAuthStateChanged((user)=> {
+     if (user){
+      buckets.map((individualBucket) => {   
+        const data = individualBucket
+        const itemId = individualBucket.id
+        updateUserData(user.uid, `buckets`, data, itemId)
+      }) 
+     }
+     // console.log(user)
+   })    
+  }, [buckets])
+  console.log(buckets)
   return (
     <>
       <div>

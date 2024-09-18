@@ -68,4 +68,4 @@ const db = getFirestore(firebaseApp);
 //   }
 // };
 
-export {firebaseApp, db}
+export {firebaseApp, db, auth}

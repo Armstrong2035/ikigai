@@ -9,6 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useTheme, useMediaQuery } from "@mui/material";
+import boardStore from "../board/store";
 
 export const Signup = () => {
   const auth = getAuth(firebaseApp);
@@ -19,6 +20,7 @@ export const Signup = () => {
     email: "",
     password: "",
   });
+  const setUserData = boardStore((state) => state.setUserData)
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -46,9 +48,11 @@ export const Signup = () => {
         email: formData.email,
         userId: user.uid,
       };
-      
+
       // Create a new document in the "users" collection
       await setDoc(doc(db, "users", user.uid), userData);
+
+      await setUserData(userData)
       
       setIsSignupComplete(true);
     } catch (error) {
@@ -74,16 +78,16 @@ export const Signup = () => {
         justifyContent: "center",
         minHeight: "100vh",
         width: "100%",
-        padding: isMobile ? "20px" : "0",
+        
       }}
     >
       <Stack 
         direction="column" 
         spacing={2} 
-        sx={{ 
-          width: isMobile ? "100%" : "300px",
-          maxWidth: "100%",
-        }}
+        // sx={{ 
+        //   width: isMobile ? "100%" : "300px",
+        //   maxWidth: "100%",
+        // }}
       >
         {textfields.map(({ id, label, value, type }) => (
           <TextField
