@@ -11,6 +11,7 @@ import BackToBoard from "./BackToBoard";
 export default function Bucket({ bucket }) {
   const updateBucketHeader = boardStore((state) => state.updateBucketHeader);
 
+  console.log(bucket)
   return (
     <div style={{ overflow: "hidden" }}>
       <BackToBoard />

@@ -10,6 +10,7 @@ const nextConfig = {
       transform: "@mui/icons-material/{{member}}",
     },
   },
+  transpilePackages: ['@mui/x-date-pickers'],
 };
 
 export default nextConfig;

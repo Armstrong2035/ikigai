@@ -36,9 +36,6 @@ export function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-      
-      // Fetch user data using the user ID
-      await boardStore.getState().fetchUserData(user.uid);
 
       // Navigate to the board page
       router.push('/board');

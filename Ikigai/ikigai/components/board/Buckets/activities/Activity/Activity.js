@@ -12,14 +12,19 @@ import {
   Stack,
   Button,
   Grid,
+  IconButton,
 } from "@mui/material";
 import ActivityMenu from "./ActivityMenu";
 import Relationships from "./Relationships";
 import AddTask from "./Tasks/AddTask";
+import TimerIcon from '@mui/icons-material/Timer';
+import TimeBlock from "./TimeBlocking/TimeBlocking";
+import TimeBlockModal from "./TimeBlocking/OpenTimeBlock";
 
 export default function Activity({ bucketId, activity, bucket }) {
   const [showAddRelationships, setShowAddRelationships] = useState(false);
   const [isHovering, setIsHovering] = useState();
+  const [isTimeblockOpen, setIsTimeblockOpen] = useState(false)
 
   const buckets = boardStore((state) => state.buckets);
   const relationships = boardStore((state) => state.relationships);
@@ -72,11 +77,16 @@ export default function Activity({ bucketId, activity, bucket }) {
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <Grid item sm={9} xs={9}>
+              <Grid item sm={6} xs={6}>
                 <Title styles={styles} activity={activity} />
               </Grid>
               <Grid item sm={3} xs={3}>
                 <ActivityMenu activity={activity} />
+              </Grid>
+              <Grid item sm={3} xs={3}>
+                <IconButton onClick={() => setIsTimeblockOpen(true)}>
+                  <TimerIcon />
+                </IconButton>
               </Grid>
             </Grid>
 
@@ -90,9 +100,22 @@ export default function Activity({ bucketId, activity, bucket }) {
       />
 
       <CardContent>
-        <Tasks activity={activity} styles={styles} />
+        <TimeBlockModal
+            isTimeblockOpen={isTimeblockOpen}
+            setIsTimeblockOpen={setIsTimeblockOpen}
+            activity={activity}
+            styles={styles}
+          />    
 
-        <AddTask activity={activity} styles={styles} />
+        <Tasks
+            activity={activity}
+            styles={styles}
+        />
+
+        <AddTask
+            activity={activity}
+            styles={styles}
+        />
       </CardContent>
 
       {/* 

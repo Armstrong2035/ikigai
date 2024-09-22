@@ -29,10 +29,9 @@ export default function Buckets() {
   const [editMode, setEditMode] = useState(false);
   const buckets = boardStore((state) => state.buckets);
 
+  console.log(buckets)
+
   const reverseBuckets = buckets.slice().reverse();
-
- 
-
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));

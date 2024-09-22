@@ -14,11 +14,14 @@
     "@mui/icons-material": "^5.15.0",
     "@mui/lab": "^5.0.0-alpha.155",
     "@mui/material": "^5.15.0",
+    "@mui/x-date-pickers": "^7.17.0",
+    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
     "firebase": "^10.13.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "zustand": "^4.5.4"
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "eslint": "^8",

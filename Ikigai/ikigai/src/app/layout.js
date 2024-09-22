@@ -1,3 +1,5 @@
+import { LocalizationProvider } from "@mui/x-date-pickers";
+
 export const metadata = {
   title: "Ikigai",
   description:
@@ -7,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: "#191919" }}>{children}</body>
+      <LocalizationProvider>
+          <body style={{ backgroundColor: "#191919" }}>{children}</body>
+      </LocalizationProvider>
     </html>
   );
 }

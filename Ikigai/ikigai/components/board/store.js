@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { getUserData } from '../../utils/firebase/retrieveData';
 
 const boardStore = create(
-  
+  persist(
     (set) => ({
       buckets: [
         {
@@ -158,6 +158,11 @@ const boardStore = create(
           buckets: state.buckets.filter((bucket) => bucket.id !== bucketId),
         })),
     }),
+    {
+      name: "board-storage", // Key for local storage
+      storage: createJSONStorage(() => localStorage), // Use localStorage
+    }
   )
+);
 
 export default boardStore;
