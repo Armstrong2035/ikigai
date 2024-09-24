@@ -2,7 +2,7 @@ import { Box, Dialog, DialogTitle, IconButton, DialogContent } from "@mui/materi
 import TimeBlock from "./TimeBlocking";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, activity, styles}){
+export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, activity}){
 
     return (
     <Box>
@@ -20,7 +20,7 @@ export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, act
         <DialogTitle sx={{ color: "#CBD6D6" }}>
           {`Block some time for ${activity.title}`}
           <IconButton
-            //onClick={}
+            onClick={ () => setIsTimeblockOpen(false)}
             sx={{
               color: "#CBD6D6",
               position: "absolute",
@@ -32,7 +32,7 @@ export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, act
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <TimeBlock styles={styles} />
+          <TimeBlock activity={activity} />
         </DialogContent>
       </Dialog>
         </Box>

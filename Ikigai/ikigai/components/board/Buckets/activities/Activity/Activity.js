@@ -61,6 +61,7 @@ export default function Activity({ bucketId, activity, bucket }) {
     };
     return priorityStyles[priority] || priorityStyles.none;
   };
+  
 
   const styles = getPriorityStyle(activity.priority);
   // console.log(buckets);

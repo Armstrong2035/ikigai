@@ -31,6 +31,7 @@ const boardStore = create(
       activities: [],
       tasks: [],
       relationships: [],
+      timeblocks: [],
       checkedTasks: {},
       userData: {},
 
@@ -157,6 +158,11 @@ const boardStore = create(
         set((state) => ({
           buckets: state.buckets.filter((bucket) => bucket.id !== bucketId),
         })),
+
+      addTimeBlock: (activityId, timeblockObject) =>
+        set((state) => ({
+          timeblocks: ([...state.timeblocks, timeblockObject ])
+        }))
     }),
     {
       name: "board-storage", // Key for local storage
