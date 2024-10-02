@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton } from "@mui/material";
+import { IconButton, Stack } from "@mui/material";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,8 +9,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddLinkIcon from "@mui/icons-material/AddLink";
 import boardStore from "../../../store";
 import AddRelationships from "./AddRelationships";
+import TimerIcon from "@mui/icons-material/Timer";
 
-export default function ActivityMenu({ activity }) {
+export default function ActivityMenu({ activity, setIsTimeblockOpen }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [addRelationship, setAddRelationship] = useState(false);
 
@@ -41,15 +42,22 @@ export default function ActivityMenu({ activity }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
-          {" "}
-          <Priority activity={activity} />
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <IconButton onClick={() => deleteActivity(activity.id)}>
-            <DeleteIcon />
-          </IconButton>
-        </MenuItem>
+        <Stack alignItems={"center"} justifyContent={"center"}>
+          <MenuItem onClick={handleClose}>
+            <Priority activity={activity} />
+          </MenuItem>
+
+          <MenuItem onClick={handleClose}>
+            <IconButton onClick={() => setIsTimeblockOpen(true)}>
+              <TimerIcon />
+            </IconButton>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <IconButton onClick={() => deleteActivity(activity.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </MenuItem>
+        </Stack>
       </Menu>
     </div>
   );

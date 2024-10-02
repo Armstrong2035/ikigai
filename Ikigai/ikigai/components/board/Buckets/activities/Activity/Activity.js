@@ -4,37 +4,20 @@ import boardStore from "../../../store";
 import Title from "./Title";
 import AddRelationships from "./AddRelationships";
 import Tasks from "./Tasks/Tasks";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Stack,
-  Button,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { Box, Card, CardContent, Grid, Stack, IconButton } from "@mui/material";
 import ActivityMenu from "./ActivityMenu";
-import Relationships from "./Relationships";
 import AddTask from "./Tasks/AddTask";
-import TimerIcon from '@mui/icons-material/Timer';
-import TimeBlock from "./TimeBlocking/TimeBlocking";
-import TimeBlockModal from "./TimeBlocking/OpenTimeBlock";
+import TimerIcon from "@mui/icons-material/Timer";
+import TimeBlockModal from "./TimeBlocking/Modal";
 
 export default function Activity({ bucketId, activity, bucket }) {
-  const [showAddRelationships, setShowAddRelationships] = useState(false);
-  const [isHovering, setIsHovering] = useState();
-  const [isTimeblockOpen, setIsTimeblockOpen] = useState(false)
+  const [isTimeblockOpen, setIsTimeblockOpen] = useState(false);
 
-  const buckets = boardStore((state) => state.buckets);
   const relationships = boardStore((state) => state.relationships);
   const rels = relationships.filter(
     (rel) =>
       activity.id === rel.activity1.id || activity.id === rel.activity2.id
   );
-
-  const tasks = boardStore((state) => state.tasks);
-  console.log(tasks);
 
   const getPriorityStyle = (priority) => {
     const priorityStyles = {
@@ -61,67 +44,59 @@ export default function Activity({ bucketId, activity, bucket }) {
     };
     return priorityStyles[priority] || priorityStyles.none;
   };
-  
 
   const styles = getPriorityStyle(activity.priority);
-  // console.log(buckets);
-  // console.log(rels);
 
   return (
     <Card sx={{ backgroundColor: styles.backgroundColor }}>
-      <CardHeader
-        title={
-          <Stack>
-            <Grid
-              container
-              direction="row"
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Grid item sm={6} xs={6}>
-                <Title styles={styles} activity={activity} />
-              </Grid>
-              <Grid item sm={3} xs={3}>
-                <ActivityMenu activity={activity} />
-              </Grid>
-              <Grid item sm={3} xs={3}>
-                <IconButton onClick={() => setIsTimeblockOpen(true)}>
-                  <TimerIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
-
-            <AddRelationships
-              activity={activity}
-              getPriorityStyle={getPriorityStyle}
-              styles={styles}
-            />
-          </Stack>
-        }
-      />
-
       <CardContent>
+        {/* Title and Utility Icons Section */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+        >
+          {/* Title on one side */}
+          <Grid item xs={9} sm={6}>
+            <Title styles={styles} activity={activity} />
+          </Grid>
+
+          {/* Activity Menu and Timer Icon on the other side */}
+          <Grid item xs={3} sm="auto">
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              justifyContent="flex-end"
+            >
+              <ActivityMenu
+                activity={activity}
+                setIsTimeblockOpen={setIsTimeblockOpen}
+              />
+              {/* <IconButton onClick={() => setIsTimeblockOpen(true)}>
+                <TimerIcon />
+              </IconButton> */}
+            </Stack>
+          </Grid>
+        </Grid>
+
+        {/* Additional content */}
+        <AddRelationships
+          activity={activity}
+          getPriorityStyle={getPriorityStyle}
+          styles={styles}
+        />
         <TimeBlockModal
-            isTimeblockOpen={isTimeblockOpen}
-            setIsTimeblockOpen={setIsTimeblockOpen}
-            activity={activity}
-            styles={styles}
-          />    
-
-        <Tasks
-            activity={activity}
-            styles={styles}
+          isTimeblockOpen={isTimeblockOpen}
+          setIsTimeblockOpen={setIsTimeblockOpen}
+          activity={activity}
+          styles={styles}
         />
-
-        <AddTask
-            activity={activity}
-            styles={styles}
-        />
+        <Tasks activity={activity} styles={styles} />
+        <AddTask activity={activity} styles={styles} />
       </CardContent>
-
-      {/* 
-        
-      <Stats bucketId={bucketId} activity={activity} /> */}
     </Card>
   );
 }

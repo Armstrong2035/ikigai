@@ -1,14 +1,23 @@
-import { Box, Dialog, DialogTitle, IconButton, DialogContent } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogTitle,
+  IconButton,
+  DialogContent,
+} from "@mui/material";
 import TimeBlock from "./TimeBlocking";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, activity}){
-
-    return (
+export default function TimeBlockModal({
+  setIsTimeblockOpen,
+  isTimeblockOpen,
+  activity,
+}) {
+  return (
     <Box>
-        <Dialog
-            open={isTimeblockOpen}
-            sx={{
+      <Dialog
+        open={isTimeblockOpen}
+        sx={{
           "& .MuiDialog-paper": {
             width: { xs: "100%", sm: "80%" }, // Adjust dialog width for smaller screens
             maxHeight: "90vh", // Prevent the dialog from exceeding viewport height
@@ -20,7 +29,7 @@ export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, act
         <DialogTitle sx={{ color: "#CBD6D6" }}>
           {`Block some time for ${activity.title}`}
           <IconButton
-            onClick={ () => setIsTimeblockOpen(false)}
+            onClick={() => setIsTimeblockOpen(false)}
             sx={{
               color: "#CBD6D6",
               position: "absolute",
@@ -35,6 +44,6 @@ export default function TimeBlockModal({setIsTimeblockOpen, isTimeblockOpen, act
           <TimeBlock activity={activity} />
         </DialogContent>
       </Dialog>
-        </Box>
-    )
+    </Box>
+  );
 }
