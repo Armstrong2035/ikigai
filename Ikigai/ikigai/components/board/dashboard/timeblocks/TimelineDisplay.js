@@ -22,7 +22,7 @@ export default function TimelineDisplay({ todaysBlocks }) {
         });
 
         return (
-          <Box>
+          <Box key={block.id}>
             <Timeline position="alternate">
               <TimelineItem>
                 <TimelineSeparator>
