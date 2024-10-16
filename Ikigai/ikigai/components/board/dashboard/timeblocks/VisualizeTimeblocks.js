@@ -60,7 +60,7 @@ export default function VisualizeTimeblocks() {
       <CardHeader
         title={
           <Typography variant="h4" sx={{ color: "#d6d6d6" }}>
-            Today's activities
+            Today&apos;s activities
           </Typography>
         }
       />
