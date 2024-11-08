@@ -1,41 +1,89 @@
 import React from "react";
 import HeroText from "./HeroText";
 import HeroImage from "./HeroImage";
-import { Box, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  useTheme,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import HeroButton from "./HeroButton";
 
 export default function HeroPage({ styles }) {
+  const theme = useTheme();
+
+  // Responsive headline styles
+  const headline = {
+    fontFamily: '"Open Sans", sans-serif',
+    fontStyle: "normal",
+    fontWeight: 600,
+    color: "rgb(255, 255, 255)",
+    textAlign: "center",
+    fontSize: "48px", // Default for smaller screens
+    lineHeight: "60px",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "56px",
+      lineHeight: "68px",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "64px",
+      lineHeight: "77px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "72px",
+      lineHeight: "84px",
+    },
+  };
+
+  // Responsive body text styles
+  const body = {
+    fontFamily: '"Open Sans", sans-serif',
+    fontStyle: "normal",
+    fontWeight: 400,
+    color: "rgb(145, 150, 154)",
+    fontSize: "16px", // Default for smaller screens
+    lineHeight: "24px",
+    textAlign: "center",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "18px",
+      lineHeight: "27px",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "20px",
+      lineHeight: "30px",
+    },
+  };
+
   return (
-    <Box sx={{ ml: 5, mr: 10, mt: 10, }}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        // Add full height to grid container
+    <Box>
+      <Stack
+        sx={{ mb: 5 }}
+        alignItems={"center"}
+        justifyContent={"center"}
+        spacing={1}
       >
-        <Grid item lg={6} sm={12}>
-          <Grid
-            container
-            spacing={5}
-            direction="column"
-            justifyContent="center"
-            
-          >
-            <Grid item>
-              <HeroText styles={styles} />
-            </Grid>
+        <Typography sx={headline}>Simpler than Notion.</Typography>
+        <Typography sx={headline}>More powerful than Todoist.</Typography>
+      </Stack>
 
-            <Grid item lg={12}>
-              <HeroButton />
-            </Grid>
-          </Grid>
-        </Grid>
+      <Typography sx={body}>
+        Ikigai combines the Eisenhower matrix, time blocking into a single
+        framework that helps you juggle multiple responsibilities and interests.
+      </Typography>
 
-        <Grid item lg={6} sm={12}>
-          <HeroImage styles={styles} />
-        </Grid>
-      </Grid>
+      <Button
+        variant={"contained"}
+        sx={{
+          borderRadius: "25px",
+          mt: 5,
+          backgroundColor: "white",
+          color: "black",
+        }}
+      >
+        Get Started / Continue
+      </Button>
     </Box>
   );
 }

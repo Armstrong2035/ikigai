@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { IconButton, Stack } from "@mui/material";
-
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -11,18 +10,22 @@ import boardStore from "../../../store";
 import AddRelationships from "./AddRelationships";
 import TimerIcon from "@mui/icons-material/Timer";
 
-export default function ActivityMenu({ activity, setIsTimeblockOpen }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function ActivityMenu({ activity }) {
+  const [anchorEl, setAnchorEl] = useState(null);
   const [addRelationship, setAddRelationship] = useState(false);
+  const [isTimeblockOpen, setIsTimeblockOpen] = useState(false);
 
   const deleteActivity = boardStore((state) => state.deleteActivity);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <div>
       <IconButton
@@ -46,7 +49,6 @@ export default function ActivityMenu({ activity, setIsTimeblockOpen }) {
           <MenuItem onClick={handleClose}>
             <Priority activity={activity} />
           </MenuItem>
-
           <MenuItem onClick={handleClose}>
             <IconButton onClick={() => setIsTimeblockOpen(true)}>
               <TimerIcon />

@@ -1,9 +1,8 @@
 import HeroPage from "./HeroPage/HeroPage";
 import NavBar from "./NavBar/NavBar";
-import { Stack, Container, Box, Typography } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Features from "./HeroPage/Features/Features";
 
 export default function LandingPage() {
   const theme = useTheme();
@@ -16,7 +15,6 @@ export default function LandingPage() {
       lineHeight: isDesktop ? "90px" : "60px",
       color: "white",
     },
-
     bodyBold: {
       fontFamily: "Poppins",
       fontWeight: "SemiBold",
@@ -39,15 +37,33 @@ export default function LandingPage() {
       color: "black",
     },
   };
-  return (
-    <>
-      <NavBar styles={styles} />
 
-      <Stack spacing={5} sx={{ ml: 5, mr: 5, mt: 15}}>
+  return (
+    <Box
+      sx={{
+        backgroundColor: "#0d0d0d",
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+        backgroundSize: "40px 40px",
+        color: "white",
+        height: "100vh",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        // border: "1px solid red",
+      }}
+    >
+      <Box
+        sx={{
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))`, // Fades from black to transparent
+          padding: isDesktop ? "100px 0" : "60px 0",
+          width: "100%",
+          height: "50%",
+          zIndex: 2,
+        }}
+      >
         <HeroPage styles={styles} />
-        <Typography align='center' sx={styles.bodyBold}>Features</Typography>
-        <Features styles={styles} />
-      </Stack>
-    </>
+      </Box>
+    </Box>
   );
 }

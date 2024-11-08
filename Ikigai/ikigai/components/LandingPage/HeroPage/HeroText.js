@@ -33,9 +33,7 @@ export default function HeroText({ styles }) {
             maxWidth: '600px',
           }}
         >
-          The Ikigai app combines elements of the Eisenhower matrix, time
-          blocking, and the pomodoro technique into a single framework that
-          helps you juggle multiple responsibilities and interests.
+          
         </Typography>
       </Grid>
     </Grid>
