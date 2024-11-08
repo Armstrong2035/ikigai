@@ -24,7 +24,11 @@ import DaySelector from "./components/DaySelector";
 import TimeSelector from "./components/TimeSelector";
 import ColorSelector from "./components/ColorSelector";
 
-export default function RecurringTimeblock({ styles, activity }) {
+export default function RecurringTimeblock({
+  styles,
+  activity,
+  setIsTimeblockOpen,
+}) {
   const addTimeBlock = boardStore((state) => state.addTimeBlock);
   const timeblocks = boardStore((state) => state.timeblocks);
   const currentTimeblock = timeblocks.map((timeblock) => {
@@ -34,7 +38,7 @@ export default function RecurringTimeblock({ styles, activity }) {
       return null;
     }
   });
-  const updateTimeBlock = boardStore((state) => state.updateTimeBlock)
+  const updateTimeBlock = boardStore((state) => state.updateTimeBlock);
 
   console.log(currentTimeblock);
 
@@ -108,25 +112,30 @@ export default function RecurringTimeblock({ styles, activity }) {
   }, []);
 
   const validateTimeblock = useCallback(() => {
-    const exists = timeblocks.some((tb) => tb.activityId === activity.id);
-    if (exists) {
-      // setError("A timeblock for this activity already exists");
-      // return; // Exit if a timeblock already exists
-      updateTimeBlock(activity.id, formData)
-    }
-    if (!formData.name) {
-      setError("Please enter a name for the timeblock");
-    } else if (!formData.repeatEvery) {
-      setError("Please select a repeat frequency");
-    } else if (
-      Object.keys(formData.checkedDays).length !== formData.frequency
-    ) {
-      setError(`Please select exactly ${formData.frequency} day(s)`);
-    } else if (!formData.color) {
-      setError("Please select a color for the timeblock");
-    } else {
-      addTimeBlock(activity.id, formData);
-      setError("");
+    try {
+      const exists = timeblocks.some((tb) => tb.activityId === activity.id);
+      if (exists) {
+        // setError("A timeblock for this activity already exists");
+        // return; // Exit if a timeblock already exists
+        updateTimeBlock(activity.id, formData);
+        setIsTimeblockOpen(false);
+      }
+      if (!formData.name) {
+        setError("Please enter a name for the timeblock");
+      } else if (!formData.repeatEvery) {
+        setError("Please select a repeat frequency");
+      } else if (
+        Object.keys(formData.checkedDays).length !== formData.frequency
+      ) {
+        setError(`Please select exactly ${formData.frequency} day(s)`);
+      } else if (!formData.color) {
+        setError("Please select a color for the timeblock");
+      } else {
+        addTimeBlock(activity.id, formData);
+        setError("");
+      }
+    } catch (error) {
+      return error;
     }
   }, [formData, activity.id, addTimeBlock]);
 

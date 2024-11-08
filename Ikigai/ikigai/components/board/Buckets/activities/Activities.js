@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { IconButton, Typography, Stack, Grid, Container } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import boardStore from "../../store";
@@ -10,23 +10,22 @@ import { auth } from "../../../../utils/firebase/firebase";
 
 export default function Activities({ bucket }) {
   const activities = boardStore((state) => state.activities);
-  const userData = boardStore((state) => state.userData)
+  const userData = boardStore((state) => state.userData);
 
-  const user = auth.currentUser
-  
-  useEffect(() => {  
-    auth.onAuthStateChanged((user)=> {
-      if (user){
-       activities.map((individualActivity) => {   
-         const data = individualActivity
-         const itemId = individualActivity.id
-         updateUserData(user.uid, `activities`, data)
-       }) 
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        activities.map((individualActivity) => {
+          const data = individualActivity;
+          const itemId = individualActivity.id;
+          //updateUserData(user.uid, `activities`, data)
+        });
       }
       // console.log(user)
-    })    
-   }, [activities])
-
+    });
+  }, [activities]);
 
   const activitiesToRender = activities.filter(
     (activity) => activity.bucketId === bucket.id

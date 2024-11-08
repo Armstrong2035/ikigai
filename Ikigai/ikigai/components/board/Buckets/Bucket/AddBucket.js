@@ -41,7 +41,7 @@ export default function AddBucket() {
   };
 
   return (
-    <IconButton onClick={handleAddBucket}>
+    <IconButton onClick={handleAddBucket} size={"large"}>
       <AddIcon sx={{ color: "#CBD6D6" }} />
     </IconButton>
   );

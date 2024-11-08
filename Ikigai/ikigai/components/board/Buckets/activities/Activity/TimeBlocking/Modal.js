@@ -41,7 +41,10 @@ export default function TimeBlockModal({
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <TimeBlock activity={activity} />
+          <TimeBlock
+            activity={activity}
+            setIsTimeblockOpen={setIsTimeblockOpen}
+          />
         </DialogContent>
       </Dialog>
     </Box>

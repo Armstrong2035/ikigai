@@ -8,21 +8,20 @@ export default function Tasks({ activity, styles }) {
   const tasks = boardStore((state) => state.tasks);
   const checkedTasks = boardStore((state) => state.checkedTasks);
 
-  const user = auth.currentUser
-  
-  useEffect(() => {  
-    auth.onAuthStateChanged((user)=> {
-      if (user){
-       tasks.map((individualTasks) => {   
-         const data = individualTasks
-        //  const itemId = individualRelationships.id
-         updateUserData(user.uid, `tasks`, data)
-       }) 
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        tasks.map((individualTasks) => {
+          const data = individualTasks;
+          //  const itemId = individualRelationships.id
+          //  updateUserData(user.uid, `tasks`, data)
+        });
       }
       // console.log(user)
-    })    
-   }, [tasks])
-
+    });
+  }, [tasks]);
 
   const toggleTaskCompletion = boardStore(
     (state) => state.toggleTaskCompletion
