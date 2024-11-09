@@ -3,6 +3,7 @@ import NavBar from "./NavBar/NavBar";
 import { Container, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import SlideShow from "./SlideShow/SlideShow";
 
 export default function LandingPage() {
   const theme = useTheme();
@@ -44,13 +45,11 @@ export default function LandingPage() {
         backgroundColor: "#0d0d0d",
         backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                           linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
-        backgroundSize: "40px 40px",
+        // backgroundSize: "40px 40px",
         color: "white",
-        height: "100vh",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        // border: "1px solid red",
       }}
     >
       <Box
@@ -64,6 +63,10 @@ export default function LandingPage() {
       >
         <HeroPage styles={styles} />
       </Box>
+
+      <Container>
+        <SlideShow />
+      </Container>
     </Box>
   );
 }
