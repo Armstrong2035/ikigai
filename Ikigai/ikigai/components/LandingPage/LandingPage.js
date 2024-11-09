@@ -77,7 +77,7 @@ export default function LandingPage() {
           }
         }
       > */}
-      {/* <SlideShow /> */}
+      <SlideShow />
       {/* </Container> */}
     </Box>
   );
