@@ -4,6 +4,7 @@ import { Container, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SlideShow from "./SlideShow/SlideShow";
+import Images from "./HeroPage/Images";
 
 export default function LandingPage() {
   const theme = useTheme();
@@ -45,8 +46,9 @@ export default function LandingPage() {
         backgroundColor: "#0d0d0d",
         backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                           linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
-        // backgroundSize: "40px 40px",
+        //backgroundSize: "40px 40px",
         color: "white",
+        height: "100vh",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
@@ -55,18 +57,28 @@ export default function LandingPage() {
       <Box
         sx={{
           background: `linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))`, // Fades from black to transparent
-          padding: isDesktop ? "100px 0" : "60px 0",
+          pt: 15,
+          pb: 3,
           width: "100%",
           height: "50%",
           zIndex: 2,
+          // border: "1px solid blue",
         }}
       >
         <HeroPage styles={styles} />
       </Box>
 
-      <Container>
-        <SlideShow />
-      </Container>
+      {/* <Images /> */}
+
+      {/* <Container
+        sx={
+          {
+             border: "1px solid red"
+          }
+        }
+      > */}
+      {/* <SlideShow /> */}
+      {/* </Container> */}
     </Box>
   );
 }

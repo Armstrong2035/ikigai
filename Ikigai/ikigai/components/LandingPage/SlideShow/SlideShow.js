@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import { Box, Card, IconButton, Paper, Stack } from "@mui/material";
-import ikigaiBucket from "../../../public/images/ikigai-bucket.png";
-import ikigaiDashboard from "../../../public/images/ikigai-dashboard.png";
-import ikigaiTimeBlock from "../../../public/images/ikigai-time-block.png";
+import React, { useState, useEffect } from "react";
+import { Box, IconButton, Stack } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/image";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import ikigaiBucket from "../../../public/images/ikigai-bucket.png";
+import ikigaiDashboard from "../../../public/images/ikigai-dashboard.png";
+import ikigaiTimeBlock from "../../../public/images/ikigai-time-block.png";
+
+export const photos = [ikigaiDashboard, ikigaiBucket, ikigaiTimeBlock];
 
 export default function SlideShow() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [tiltAngle, setTiltAngle] = useState(15); // Initial tilt angle
 
-  const photos = [ikigaiDashboard, ikigaiBucket, ikigaiTimeBlock];
   const nextPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
   };
@@ -22,25 +23,49 @@ export default function SlideShow() {
     );
   };
 
+  useEffect(() => {
+    // Update tilt angle based on scroll
+    const handleScroll = () => {
+      // Get the scroll position
+      const scrollPosition = window.scrollY;
+      // Calculate tilt angle: as scroll goes up, increase angle; as it goes down, reduce it
+      const newTiltAngle = Math.max(0, 15 - scrollPosition * 0.05); // Limits the tilt to 0-15 degrees
+      setTiltAngle(newTiltAngle);
+    };
+
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <Box>
+    <Box sx={{ border: "1px solid red" }}>
       <Stack direction={"row"} justifyContent={"space-between"}>
-        <IconButton>
-          <ArrowBackIosIcon
-            size={"large"}
-            onClick={prevPhoto}
-            sx={{ color: "white" }}
-          />
+        <IconButton onClick={prevPhoto}>
+          <ArrowBackIosIcon size={"large"} sx={{ color: "#FFFFFF" }} />
         </IconButton>
 
-        <Image
-          src={photos[currentIndex]}
-          alt={`Photo ${currentIndex + 1}`}
-          layout="responsive"
-          quality={100}
-        />
-        <IconButton sx={{ color: "white" }}>
-          <ArrowForwardIosIcon size={"large"} onClick={nextPhoto} />
+        {/* Apply tilt transform based on tiltAngle */}
+        <Box
+          sx={{
+            transform: `perspective(800px) rotateX(${tiltAngle}deg)`,
+            transition: "transform 0.2s ease-out", // Smooth transition for tilt
+          }}
+        >
+          <Image
+            src={photos[currentIndex]}
+            alt={`Photo ${currentIndex + 1}`}
+            layout="responsive"
+            quality={100}
+          />
+        </Box>
+
+        <IconButton onClick={nextPhoto} sx={{ color: "#FFFFFF" }}>
+          <ArrowForwardIosIcon size={"large"} />
         </IconButton>
       </Stack>
     </Box>

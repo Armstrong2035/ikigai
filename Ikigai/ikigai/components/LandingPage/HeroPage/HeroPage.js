@@ -8,7 +8,9 @@ import {
   useTheme,
   useMediaQuery,
   Button,
+  Container,
 } from "@mui/material";
+import Link from "next/link";
 import HeroButton from "./HeroButton";
 
 export default function HeroPage({ styles }) {
@@ -57,33 +59,39 @@ export default function HeroPage({ styles }) {
   };
 
   return (
-    <Box>
+    <Container>
       <Stack
         sx={{ mb: 5 }}
         alignItems={"center"}
         justifyContent={"center"}
         spacing={1}
       >
+        {/* <Typography sx={headline}>
+          A modular approach to productivity.
+        </Typography> */}
         <Typography sx={headline}>Simpler than Notion.</Typography>
-        <Typography sx={headline}>More powerful than Todoist.</Typography>
+        <Typography sx={headline}>More Modular than Todoist.</Typography>
       </Stack>
 
       <Typography sx={body}>
-        Ikigai combines the Eisenhower matrix, time blocking into a single
-        framework that helps you juggle multiple responsibilities and interests.
+        Ikigai combines elements of the Eisenhower Matrix, and Time Blocking
+        into a single framework that helps you juggle multiple responsibilities
+        and interests.
       </Typography>
 
-      <Button
-        variant={"contained"}
-        sx={{
-          borderRadius: "25px",
-          mt: 5,
-          backgroundColor: "white",
-          color: "black",
-        }}
-      >
-        Get Started / Continue
-      </Button>
-    </Box>
+      <Link href={`/board`}>
+        <Button
+          variant={"contained"}
+          sx={{
+            borderRadius: "25px",
+            mt: 5,
+            backgroundColor: "white",
+            color: "black",
+          }}
+        >
+          Get Started / Continue
+        </Button>
+      </Link>
+    </Container>
   );
 }

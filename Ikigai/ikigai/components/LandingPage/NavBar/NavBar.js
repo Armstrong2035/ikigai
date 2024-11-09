@@ -5,21 +5,21 @@ export default function NavBar() {
   return (
     <div style={{}}>
       <AppBar sx={{ backgroundColor: "inherit" }}>
-        <Stack direction="row" justifyContent={"flex-end"} sx={{ mr: 2 }}>
+        <Stack direction="row" justifyContent={"flex-start"} sx={{ ml: 10 }}>
           <Toolbar>
-            <Link href="/signup" style={{ textDecoration: "none" }}>
-              <p
-                style={{
-                  color: "white",
-                  cursor: "pointer",
-                  transition: "color 0.3s ease",
-                }}
-              >
-                Signup
-              </p>
-            </Link>
+            {/* <Link href="/signup" style={{ textDecoration: "none" }}> */}
+            <p
+              style={{
+                color: "white",
+                cursor: "pointer",
+                transition: "color 0.3s ease",
+              }}
+            >
+              Ikigai
+            </p>
+            {/* </Link> */}
           </Toolbar>
-          <Toolbar>
+          {/* <Toolbar>
             <Link href={"/login"}>
               <button
                 style={{
@@ -41,7 +41,7 @@ export default function NavBar() {
                 Login
               </button>
             </Link>
-          </Toolbar>
+          </Toolbar> */}
         </Stack>
       </AppBar>
     </div>
