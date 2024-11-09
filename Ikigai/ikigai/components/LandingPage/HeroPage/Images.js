@@ -10,8 +10,14 @@ export default function Images() {
   const photos = [ikigaiBucket, ikigaiTimeBlock, ikigaiDashboard];
   return (
     <Masonry columns={3} spacing={2}>
-      {photos.map((photo) => (
-        <Image src={photo} alt={`${photo}`} layout="responsive" quality={100} />
+      {photos.map((photo, index) => (
+        <Image
+          src={photo}
+          alt={`${photo}`}
+          layout="responsive"
+          quality={100}
+          key={index}
+        />
       ))}
     </Masonry>
   );

@@ -43,7 +43,7 @@ export default function SlideShow() {
   }, []);
 
   return (
-    <Box sx={{ border: "1px solid red" }}>
+    <Box sx={{ mt: 5, backgroundColor: "#0D0D0D" }}>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <IconButton onClick={prevPhoto}>
           <ArrowBackIosIcon size={"large"} sx={{ color: "#FFFFFF" }} />

@@ -48,7 +48,6 @@ export default function LandingPage() {
                           linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
         //backgroundSize: "40px 40px",
         color: "white",
-        height: "100vh",
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
@@ -70,15 +69,9 @@ export default function LandingPage() {
 
       {/* <Images /> */}
 
-      {/* <Container
-        sx={
-          {
-             border: "1px solid red"
-          }
-        }
-      > */}
-      <SlideShow />
-      {/* </Container> */}
+      <Container>
+        <SlideShow />
+      </Container>
     </Box>
   );
 }

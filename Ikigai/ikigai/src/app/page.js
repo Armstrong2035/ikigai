@@ -5,7 +5,7 @@ import NavBar from "../../components/LandingPage/NavBar/NavBar";
 
 export default function Home() {
   return (
-    <div style={{}}>
+    <div style={{ backgroundColor: "#000000" }}>
       <NavBar />
       <LandingPage />
     </div>
